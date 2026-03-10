@@ -24,4 +24,7 @@ contract FashionAuth is ERC721URIStorage, Ownable {
         emit ProductMinted(newTokenId, to, productHash);
         return newTokenId;
     }
+    function verifyProduct(bytes32 productHash) public view returns (bool){
+        return productHashToTokenId[productHash] != 0;
+    }
 }
