@@ -1,4 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import MintProduct from "./components/MintProduct";
 
 function App() {
   return (
@@ -6,6 +7,8 @@ function App() {
       <h1>Fashion Authentication</h1>
 
       <ConnectButton />
+      <MintProduct />
+     
     </div>
   );
 }
