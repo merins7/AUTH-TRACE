@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWriteContract, useWaitForTransactionReceipt, useAccount } from "wagmi";
 import { keccak256, toBytes } from "viem";
 
 import { contractAddress, contractABI } from "../contracts/FashionAuth";
 import { uploadFile} from "../utils/ipfsUpload";
 import { createMetadata } from "../utils/createMetadata";
+
+import QRCodeGenerator from "./QRCodeGenerator";
+import { publicClient } from "../config";
 
 function MintProduct() {
 
@@ -17,12 +20,50 @@ function MintProduct() {
       hash,
     });
 
+  useEffect(() => {        //runs whnever "hash" changes, which happens after writeContract() is called and transaction is sent to blockchain. We need the transaction receipt to get the tokenId, which is only available after transaction is confirmed, which is when hash becomes available. 
+
+  async function getTokenId() {
+
+    if (!hash) return;
+
+    const receipt =
+      await publicClient.waitForTransactionReceipt({
+        hash,
+      });
+
+    console.log(publicClient.chain);  
+    console.log("Receipt:", receipt);
+   console.log("Log 0", receipt.logs[0]);
+console.log("Log 1", receipt.logs[1]);
+console.log("Log 2", receipt.logs[2]);
+
+    const event = receipt.logs[2];
+    console.log("Event:", event);
+
+    const mintedTokenId =
+      Number(event.topics[1]); // topics store values in hex, convert to number
+       // works because parameters in events are indexed
+    console.log(
+      "Minted Token ID:",
+      mintedTokenId
+    );
+
+    setTokenId(mintedTokenId);
+  }
+
+  getTokenId();
+
+ }, [hash]); //dependency array, useEffect runs whenever "hash" changes
+
+
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [serial, setSerial] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [tokenId, setTokenId] = useState(null);
+  
 
   const mintProduct = async () => {
 
@@ -125,6 +166,9 @@ const file = new File([blob], "metadata.json")*/ //telling Pinata "this file is 
       </button>
 
       {isSuccess && <p>NFT Minted Successfully</p>}
+      {tokenId && (
+          <QRCodeGenerator tokenID={tokenId} />
+      )}
     </div>
   );
 }
