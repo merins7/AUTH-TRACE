@@ -89,9 +89,7 @@ function VerifyProduct() {
 
           <p>Current Owner: {product.owner}</p>
 
-          <h3>Ownership History</h3>
-
-         <h3>Ownership History</h3>
+          <h3>Ownership Traceability</h3>
 
 <div>
   {product.history.map((address, index) => (

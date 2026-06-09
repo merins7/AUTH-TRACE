@@ -1,7 +1,7 @@
 import {QRCodeCanvas} from "qrcode.react";
 
 function QRCodeGenerator({tokenID}){
-    const verifyURL = 'https://localhost:5123/verify/${tokenID}';
+    const verifyURL = 'https://localhost:5173/verify/${tokenID}';
     return(
         <div>
             <h3>Scan to Verify Product</h3>
