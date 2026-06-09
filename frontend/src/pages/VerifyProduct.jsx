@@ -8,12 +8,15 @@ function VerifyProduct() {
   const { tokenId } = useParams();
 
   const [product, setProduct] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     loadProduct();
   }, []); // empty dependency array means run on page load
 
   async function loadProduct() {
+
+    try {
     console.log("Verify token:", tokenId);
 
     const owner = await publicClient.readContract({
@@ -50,13 +53,19 @@ function VerifyProduct() {
       image: imageURL,
       owner,
     });
+  } catch (err) {
+    console.error("Error loading product:", err);
+    setError("Product not found");
   }
+}
 
   return (
     <div style={{ padding: "40px" }}>
       <h1>Product Verification</h1>
 
-      <p>Token ID: {tokenId}</p>
+      {/*<p>Token ID: {tokenId}</p>*/}
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
       {product && ( //if product exists
         <div>
