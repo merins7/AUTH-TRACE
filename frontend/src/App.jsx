@@ -1,15 +1,24 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import MintProduct from "./components/MintProduct";
+import { Routes, Route } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import VerifyProduct from "./pages/VerifyProduct";
 
 function App() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>Fashion Authentication</h1>
 
-      <ConnectButton />
-      <MintProduct />
-     
-    </div>
+  return (
+    <Routes>
+
+      <Route
+        path="/"
+        element={<HomePage />}
+      />
+
+      <Route
+        path="/verify/:tokenId"
+        element={<VerifyProduct />}
+      />
+
+    </Routes>
   );
 }
 

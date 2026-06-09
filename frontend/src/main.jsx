@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -20,9 +21,11 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <WagmiProvider config={config}>
     <QueryClientProvider client={queryClient}>
-      <RainbowKitProvider chains={[anvil, sepolia]}>
-        <App />
-      </RainbowKitProvider>
+      <BrowserRouter>
+        <RainbowKitProvider chains={[anvil, sepolia]}>
+          <App />
+        </RainbowKitProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   </WagmiProvider>
 );
