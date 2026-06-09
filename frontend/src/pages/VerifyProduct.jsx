@@ -37,6 +37,15 @@ function VerifyProduct() {
 
     console.log("Metadata URI:", metadataURI);
 
+    const history = await publicClient.readContract({
+    address: contractAddress,
+    abi: contractABI,
+    functionName: "getOwnershipHistory",
+   args: [BigInt(tokenId)],
+   });
+
+   console.log("History:", history);
+
     const metadataURL = metadataURI.replace("ipfs://", "https://ipfs.io/ipfs/");
     console.log("Metadata URL:", metadataURL); //browsers cant directly fetch from ipfs://, need to replace with https://ipfs.io/ipfs/ to fetch from IPFS gateway
 
@@ -52,6 +61,7 @@ function VerifyProduct() {
       ...metadata,
       image: imageURL,
       owner,
+      history,
     });
   } catch (err) {
     console.error("Error loading product:", err);
@@ -77,7 +87,40 @@ function VerifyProduct() {
 
           <p>Serial: {product.serial}</p>
 
-          <p>Owner: {product.owner}</p>
+          <p>Current Owner: {product.owner}</p>
+
+          <h3>Ownership History</h3>
+
+         <h3>Ownership History</h3>
+
+<div>
+  {product.history.map((address, index) => (
+    <div key={index}>
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "10px",
+          borderRadius: "8px",
+          marginBottom: "5px",
+        }}
+      >
+        {address}
+      </div>
+
+      {index < product.history.length - 1 && (
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "24px",
+            marginBottom: "5px",
+          }}
+        >
+          ↓
+        </div>
+      )}
+    </div>
+  ))}
+</div>
 
           <p>Description: {product.description}</p>
 

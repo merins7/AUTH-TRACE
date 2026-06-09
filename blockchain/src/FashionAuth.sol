@@ -9,6 +9,7 @@ contract FashionAuth is ERC721URIStorage, Ownable {
 
     uint256 private _tokenIds;
     mapping(bytes32 => uint256) public productHashToTokenId;
+    mapping(uint256 => address[]) public ownershipHistory;
 
     event ProductMinted(uint256 indexed tokenId, address indexed owner, bytes32 indexed productHash);
 
@@ -19,6 +20,7 @@ contract FashionAuth is ERC721URIStorage, Ownable {
         _tokenIds++;
         uint256 newTokenId = _tokenIds;
         _safeMint(to, newTokenId);
+        ownershipHistory[newTokenId].push(to);
         _setTokenURI(newTokenId, metadataURI);
         productHashToTokenId[productHash] = newTokenId;
         emit ProductMinted(newTokenId, to, productHash);
@@ -27,4 +29,27 @@ contract FashionAuth is ERC721URIStorage, Ownable {
     function verifyProduct(bytes32 productHash) public view returns (bool){
         return productHashToTokenId[productHash] != 0;
     }
+    function _update(address to, uint256 tokenId,address auth)internal override returns (address){
+     address previousOwner =
+        super._update(
+            to,
+            tokenId,
+            auth
+        );
+
+     // Ignore minting because mint()
+     // already stores first owner
+     if (
+        previousOwner != address(0) &&
+        to != address(0)
+     ) {
+        ownershipHistory[tokenId]
+            .push(to);
+       }
+     return previousOwner;
+    }
+    function getOwnershipHistory(uint256 tokenId)public view returns(address[] memory)
+   {
+     return ownershipHistory[tokenId];
+   }
 }

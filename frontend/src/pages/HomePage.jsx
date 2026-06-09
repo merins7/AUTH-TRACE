@@ -1,5 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import MintProduct from "../components/MintProduct";
+import TransferProduct from "../components/TransferProduct";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
 
       <ConnectButton />
       <MintProduct />
+      <TransferProduct />
      
     </div>
   );
