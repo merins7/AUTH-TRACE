@@ -5,7 +5,7 @@ import TransferProduct from "../components/TransferProduct";
 function App() {
   return (
     <div style={{ padding: "40px" }}>
-      <h1>Fashion Authentication</h1>
+      <h1>Product Authentication</h1>
 
       <ConnectButton />
       <MintProduct />

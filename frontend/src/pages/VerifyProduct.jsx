@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { contractAddress, contractABI } from "../contracts/FashionAuth";
+import { contractAddress, contractABI } from "../contracts/AuthTrace";
 import { publicClient } from "../config";
 
 function VerifyProduct() {

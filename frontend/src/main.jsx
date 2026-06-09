@@ -11,8 +11,8 @@ import { anvil, sepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
-  appName: "FashionAuth",
-  projectId: "fashionauth-demo",
+  appName: "AuthTrace",
+  projectId: "authTrace-dem0",
   chains: [anvil,sepolia],
 });
 

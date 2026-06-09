@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useWriteContract, useWaitForTransactionReceipt, useAccount } from "wagmi";
 import { keccak256, toBytes } from "viem";
 
-import { contractAddress, contractABI } from "../contracts/FashionAuth";
+import { contractAddress, contractABI } from "../contracts/AuthTrace";
 import { uploadFile} from "../utils/ipfsUpload";
 import { createMetadata } from "../utils/createMetadata";
 

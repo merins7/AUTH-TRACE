@@ -4,7 +4,7 @@ import { useWriteContract } from "wagmi";
 import {
   contractAddress,
   contractABI,
-} from "../contracts/FashionAuth";
+} from "../contracts/AuthTrace";
 
 function TransferProduct() {
   const [tokenId, setTokenId] = useState("");
