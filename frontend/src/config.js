@@ -1,8 +1,8 @@
 import { createPublicClient, http } from "viem"; // blockchain reader, uses RPC connection to read data from blockchain
-import { sepolia, anvil } from "viem/chains";
+import { sepolia } from "viem/chains";
 
 export const publicClient = createPublicClient({
-    chains: [sepolia, anvil],
-    transport: http("http://127.0.0.1:8545"),
+    chains: [sepolia],
+    transport: http(import.meta.env.VITE_SEPOLIA_RPC_URL),
 
 });
