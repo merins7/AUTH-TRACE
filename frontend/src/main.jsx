@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
   appName: "AuthTrace",
-  projectId: "authTrace-dem0",
+  projectId: "c77b962c77e2bbfdca6ef6dea6d8322b",
   chains: [sepolia],
 });
 
