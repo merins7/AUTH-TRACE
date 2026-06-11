@@ -46,7 +46,7 @@ function VerifyProduct() {
 
    console.log("History:", history);
 
-    const metadataURL = metadataURI.replace("ipfs://", "https://ipfs.io/ipfs/");
+    const metadataURL = metadataURI.replace("ipfs://",  "https://gateway.pinata.cloud/ipfs/");
     console.log("Metadata URL:", metadataURL); //browsers cant directly fetch from ipfs://, need to replace with https://ipfs.io/ipfs/ to fetch from IPFS gateway
 
     const response = await fetch(metadataURL);
@@ -54,7 +54,7 @@ function VerifyProduct() {
 
     console.log("Metadata:", metadata);
 
-    const imageURL = metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+    const imageURL = metadata.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/");
     console.log("Image URL:", imageURL);
 
     setProduct({
