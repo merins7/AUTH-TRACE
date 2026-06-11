@@ -5,8 +5,9 @@ function QRCodeGenerator({tokenID}){
     return(
         <div>
             <h3>Scan to Verify Product</h3>
+            <p>{verifyURL}</p> 
             <QRCodeCanvas value={verifyURL} size={200}/>
-             <p>{verifyURL}</p> 
+             
         </div>
     )
 }

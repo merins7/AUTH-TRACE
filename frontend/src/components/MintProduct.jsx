@@ -169,7 +169,7 @@ const file = new File([blob], "metadata.json")*/ //telling Pinata "this file is 
       {tokenId && (
           <QRCodeGenerator tokenID={tokenId} />
       )}
-      console.log("Verify URL:", verifyURL);
+     
     </div>
   );
 }
